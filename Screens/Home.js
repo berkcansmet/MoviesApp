@@ -6,43 +6,108 @@ import Trend from './Trend';
 import Klasik from './Klasik';
 import { Container, Content, Icon } from 'native-base';
 import { Fonts } from '../Helpers/Fonts';
+import axios from 'axios';
+import {URL, API_KEY, SORT, SORT2} from '../Helpers/Config';
 
-// create a component
+
 class Home extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            movies: null,
+            available: true,
+            movies2: null,
+            
+        }
+       
+        this.getRequestAxios()
+        this.getRequestAxios2()
+    };
+
+    async getRequestAxios(){
+        try{
+            await axios.get(URL+'discover/movie?sort_by='+SORT+'&api_key='+API_KEY).then(async(res) => {
+               this.setState({
+                   movies: res.data.results
+               })
+               console.log("State", this.state.movies)
+            })
+            .catch(async(err) => {
+                console.warn(err);
+            })
+        
+            
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+    
+    renderMovies = () => {
+        var Movies = this.state.movies;
+        if ( Movies ) {
+            return Movies.map((data,index) => {
+                return (
+                    <Trend TrendId={data.id} title={data.original_title} image={data.poster_path} kaynak={data.overview} imdb={data.vote_average} />
+                    
+                )
+            })
+        }
+       
+    };
+
+    async getRequestAxios2(){
+        try{
+            await axios.get(URL+'discover/tv?sort_by='+SORT+'&api_key='+API_KEY).then(async(res) => {
+               this.setState({
+                   movies2: res.data.results
+               })
+               console.log("State", this.state.movies2)
+            })
+            .catch(async(err) => {
+                console.warn(err);
+            })
+        
+            
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+    renderKlasik = () => {
+        var Movies2 = this.state.movies2;
+        if ( Movies2 ) {
+            return Movies2.map((data,index) => {
+                return (
+                    <Klasik TrendId={data.id} title={data.original_name} image={data.poster_path} kaynak={data.overview} imdb={data.vote_average}/>
+                    
+                )
+            })
+        }
+    }
+    
     render() {
         return (
             <Container>
               <Content>  
-                <PageHeader/>
-                <View>
+                <PageHeader isAvailable={(bool) => this.setState({ available: bool})} 
+                             />
+                { this.state.available == true && (
+                    <View>
                 <Text style={styles.Text}>Trend</Text>
                 <ScrollView horizontal={true} showHorizontalIndicator={false}>
-                    <Trend/>
-                    <Trend/>
-
-<Trend/>
-
-<Trend/>
-
-<Trend/>
-
-<Trend/>
-<Trend/>
-<Trend/>
-<Trend/>
-<Trend/>
-<Trend/>
+                  {this.renderMovies()}
 
                 </ScrollView>
                     <Text style={styles.Text}>Klasikler</Text>
                 <View style={styles.View}>
-                    <Klasik/>
-                    <Klasik/>
-                    <Klasik/>
-                    <Klasik/>
-                    <Klasik/>
+                    {this.renderKlasik()}
                 </View>    
                 </View>
+                ) }
+                
               </Content>
             </Container>
                         
@@ -65,6 +130,7 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start',
         flexDirection:'row', 
         flexWrap:'wrap',
+        margin: 30
     }
 });
 

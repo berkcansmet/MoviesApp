@@ -7,27 +7,6 @@ import {Fonts} from '../Helpers/Fonts'
 import {Actions} from 'react-native-router-flux'
 // create a component
 class TopHeader extends Component {
-    constructor(props){
-        super(props)
-        this.state= {
-            filmAdı: 'Loading'
-            
-        };
-    }
-
-    
-   
-        componentDidMount(){
-            fetch('http://www.omdbapi.com/?i=tt3896198&apikey=6522ea91')
-            .then(data => data.json())
-            .then(data2 => {
-                console.log(data2.Title);
-                this.setState({
-                    filmAdı: data2.Title
-                });
-            });
-        
-        }
 
         
         
@@ -51,7 +30,7 @@ class TopHeader extends Component {
                     </TouchableOpacity>
                 </View>    
                 <View>
-                    <Text style={styles.Text}>{this.state.filmAdı}</Text>
+                    <Text style={styles.Text}>{this.state.title}</Text>
                 </View>
                 <TouchableOpacity onPress={this.likeImage} >
                 <View style={styles.Right}>

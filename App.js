@@ -17,6 +17,7 @@ class App extends Component {
           title = 'Home'
           hideNavBar
           />
+          
           <Scene key = 'Detay'
           component = {Detay}
           title = 'Detay'

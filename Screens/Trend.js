@@ -1,43 +1,29 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,ScrollView,Image,Dimensions } from 'react-native';
+import { View, Text, StyleSheet,ScrollView,Image,Dimensions,TouchableOpacity } from 'react-native';
 import { Container, Content, Icon, Thumbnail } from 'native-base';
 import {Fonts} from '../Helpers/Fonts'
+import {Actions} from 'react-native-router-flux'
 
 // create a component
 class Trend extends Component {
-    constructor(props){
-        super(props)
-        this.state= {
-            filmAdı: 'Loading'
-            
-        };
-    }
-
     
-   
-        componentDidMount(){
-            fetch('http://www.omdbapi.com/?i=tt3896198&apikey=6522ea91')
-            .then(data => data.json())
-            .then(data2 => {
-                console.log(data2.Title);
-                this.setState({
-                    filmAdı: data2.Title
-                });
-            });
-        
-        }
     
     
     render() {
         return (
-                    <View style={styles.trend}>         
+            
+            
+                    <View style={styles.trend}> 
+                            <TouchableOpacity onPress={() => Actions.Detay({TrendId: this.props.TrendId, title: this.props.title, image: this.props.image, kaynak: this.props.kaynak, imdb: this.props.imdb})}>
                                 <Image
                                     style={styles.thumbnail}
-                                    source={{uri: 'https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=545&q=80'}}/>
-    <Text style={styles.text}>{this.state.filmAdı}</Text>
+                                    source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + this.props.image}}/>
+                                <Text style={styles.text}>{this.props.title}</Text>
+                            </TouchableOpacity>   
+                                
                     </View> 
- 
+            
         );
     }
 }
@@ -63,6 +49,9 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 17,
         fontFamily: Fonts.Medium
+
+    },
+    text2:{
 
     }
 });

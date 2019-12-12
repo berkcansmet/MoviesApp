@@ -5,49 +5,30 @@ import { Container, Content, } from 'native-base';
 import TopHeader from '../Components/TopHeader';
 import {Fonts} from '../Helpers/Fonts'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Home from './Home';
 // create a component
 class Detay extends Component {
-    constructor(props){
-        super(props)
-        this.state= {
-            filmImg: 'Loading'
-            
-        };
-    }
-
-    
-   
-        componentDidMount(){
-            fetch('http://img.omdbapi.com/?i=tt3896198&apikey=6522ea91')
-            .then(data => data.json())
-            .then(data2 => {
-                console.log(data2.Img);
-                this.setState({
-                    filmImg: data2.I
-                });
-            });
-        
-        }
-    render() {
+     render() {
         return (
+            
            <Content>
                 <Container>
                     <TopHeader/>
                     <View >
                         <Image style={styles.Card}
-                                    source={{uri: 'https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg'}}/>
+                                    source={{uri: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + this.props.image}}/>
                     </View>
                     <View style={styles.Imdb}>
-                    <Text style={styles.Text}>IMDB PUANI:</Text>
-                    <Text style={styles.Text1} >
-                    <Icon name={'star'} color="yellow" size={25}/>
-                    8.3</Text>
+                        <Text style={styles.Text}>IMDB PUANI: </Text>
+                        <Text style={styles.Text1} >
+                        <Icon name={'star'} color="yellow" size={25}/>
+                        {this.props.imdb}</Text>
                     </View>
                     <View>
                     <Text style={styles.Text2}>Film Konusu:</Text>
                     </View>
                     <View>
-                    <Text style={styles.Text3}>Film Konusu:</Text>
+                    <Text style={styles.Text3}>{this.props.kaynak}</Text>
                     </View>
                 </Container>
            </Content>
@@ -64,7 +45,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     Imdb:{
-        marginLeft:110,
+        marginLeft:180,
         marginTop:-200,
         height:30,
         width:180,
