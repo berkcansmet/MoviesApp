@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 17,
-        fontFamily: Fonts.Medium
+        fontFamily: Fonts.Medium,
+        color: 'white'
 
     }
 });

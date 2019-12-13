@@ -92,9 +92,9 @@ class PageHeader extends Component {
             <View style={styles.container}>
                 <View style={styles.searchView}>
                     
-                    <Input style={styles.input} placeholderTextColor={'#373737'} placeholder={' Search to Movie '} onChangeText={text => this.changeText(text)} />
+                    <Input style={styles.input} placeholderTextColor={'#373737'} placeholder={' Search to Movie '} placeholderTextColor='white' onChangeText={text => this.changeText(text)} />
                       <TouchableOpacity style={styles.icon}>  
-                        <Icon name='search' size = {10} />
+                        <Icon name={'search'} size = {10} color='white' />
                       </TouchableOpacity>
                     
                     
@@ -125,8 +125,9 @@ const styles = StyleSheet.create({
         paddingTop:30,
         justifyContent: 'space-between',
         alignItems: 'center',
-        
-        backgroundColor: '#fff',
+        backgroundColor: 'black',
+        borderBottomColor:'white',
+        borderBottomWidth: 1
     },
     searchView:{
         width:'100%',

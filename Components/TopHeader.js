@@ -20,13 +20,13 @@ class TopHeader extends Component {
 
     render() {
         const { liked } = this.state
-		const colorValue = liked ? 'red' : 'black'
+		const colorValue = liked ? 'red' : 'white'
 		
         return (
             <View style={styles.container}>
                 <View>
                     <TouchableOpacity onPress={() => Actions.Home()}>
-                        <Icon name='long-arrow-left' size={35}/>
+                        <Icon name='arrow-left' size={20} color={'white'}/>
                     </TouchableOpacity>
                 </View>    
                 <View>
@@ -46,12 +46,14 @@ class TopHeader extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 10,
-        paddingTop:30,
+        paddingTop:10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderBottomWidth: 0.3,
-        borderBottomColor: 'transparent'
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
+        backgroundColor:'black'
+
         
     },
     Text:{

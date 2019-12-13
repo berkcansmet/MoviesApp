@@ -49,7 +49,7 @@ class Home extends Component {
         if ( Movies ) {
             return Movies.map((data,index) => {
                 return (
-                    <Trend TrendId={data.id} title={data.original_title} image={data.poster_path} kaynak={data.overview} imdb={data.vote_average} />
+                    <Trend TrendId={data.id} title={data.original_title} image={data.poster_path} kaynak={data.overview} imdb={data.vote_average} yil={data.release_date} backimg={data.backdrop_path} />
                     
                 )
             })
@@ -90,21 +90,21 @@ class Home extends Component {
     
     render() {
         return (
-            <Container>
+            <Container style={styles.container}>
               <Content>  
                 <PageHeader isAvailable={(bool) => this.setState({ available: bool})} 
                              />
                 { this.state.available == true && (
                     <View>
-                <Text style={styles.Text}>Trend</Text>
+                
                 <ScrollView horizontal={true} showHorizontalIndicator={false}>
                   {this.renderMovies()}
 
                 </ScrollView>
                     <Text style={styles.Text}>Klasikler</Text>
-                <View style={styles.View}>
+                <ScrollView horizontal={true} showHorizontalIndicator={false}>
                     {this.renderKlasik()}
-                </View>    
+                 </ScrollView>   
                 </View>
                 ) }
                 
@@ -120,17 +120,18 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#000000',
     }, 
     Text:{
         fontSize: 25,
-        fontFamily: Fonts.Bold
+        fontFamily: Fonts.Bold,
+        color: 'white'
     },
     View:{
         justifyContent:'flex-start',
         flexDirection:'row', 
         flexWrap:'wrap',
-        margin: 30
+        //margin: 30
     }
 });
 
